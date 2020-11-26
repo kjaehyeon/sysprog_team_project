@@ -3,13 +3,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <signal.h>
+#include <sys/ioctl.h>
+
 #include "edge_runner.h"
 enum state { start, in_play, help};//enum for store program state
 
 void helpWin();
 int play();
 
+
 int main(void){
+	
+	printf("\033[8;50;100t");// set terminal size col = 100, row = 50
+
 	char ch;
 	int play_retVal = 0; 
 	enum state cur_state = start;
@@ -21,7 +28,6 @@ int main(void){
 	initscr();
 	crmode();
 	noecho();
-	
 	startWin();
 
 	while(1){
