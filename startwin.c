@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <curses.h>
 
-int main(int argc, char * argv[]){
-	initscr();
+void startWin(){
 	clear();
 	move(10,COLS/2-40);
 	addstr("####### ######   #####  #######    ######  #     # #     # #     # ####### ######");
@@ -65,7 +64,5 @@ int main(int argc, char * argv[]){
 	move(LINES/2 + 18, COLS/2-10);
 	addstr("**********************");
 	refresh();
-	getch();
-	endwin();
 }
 

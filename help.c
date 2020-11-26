@@ -2,7 +2,7 @@
 #include<curses.h>
 #include<string.h>
 
-void help(){
+void helpWin(){
 	
 	clear();
 	int c;
@@ -31,5 +31,4 @@ void help(){
 
 	refresh();
 
-	endwin();
 }
