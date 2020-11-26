@@ -31,13 +31,14 @@ int main(void){
 			helpWin();
 			cur_state = help;
 		}
-		if(ch == 'p' && cur_state == start){	
+		if(ch == 's' && cur_state == start){	
 			cur_state = in_play;
 			play();
 			endwin();
-		//	play_retVal = play();
+		//this code will activate after implementing play();
+		/*	play_retVal = play();
 
-		/*	if(play_retVal == 1){
+			if(play_retVal == 1){
 				cur_state = start;
 				startWin();
 			}else exit(0);*/
@@ -58,6 +59,7 @@ int main(void){
 			printf("exit\n");
 			exit(0);
 		}
+		//to here
 
 	}
 }
