@@ -34,7 +34,7 @@ int main(void){
 		if(ch == 's' && cur_state == start){	
 			cur_state = in_play;
 			play();
-			endwin();
+		
 		//this code will activate after implementing play();
 		/*	play_retVal = play();
 
