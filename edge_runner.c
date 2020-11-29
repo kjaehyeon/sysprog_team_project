@@ -4,9 +4,9 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/ioctl.h>
-
 #include "edge_runner.h"
-enum state { start, in_play, help};//enum for store program state
+
+enum state { initial, in_play, help};//enum for store program state
 
 int main(void){
 	
@@ -14,7 +14,7 @@ int main(void){
 
 	char ch;
 	int play_retVal = 0; 
-	enum state cur_state = start;
+	enum state cur_state = initial;
 	
 	int flag = fcntl(0, F_GETFL);
 	flag |= O_NONBLOCK;
@@ -28,11 +28,11 @@ int main(void){
 	while(1){
 		ch = getch();
 		if(cur_state != in_play){	
-			if(ch == 'h' &&	cur_state == start){
+			if(ch == 'h' &&	cur_state == initial){
 				helpWin();
 				cur_state = help;
 			}
-			if(ch == 's' && cur_state == start){	
+			if(ch == 's' && cur_state == initial){	
 				cur_state = in_play;
 				play();
 		
@@ -54,7 +54,7 @@ int main(void){
 				startWin();
 				cur_state = start;
 			}
-			if(ch == 'e' && cur_state == start){
+			if(ch == 'e' && cur_state == initial){
 				endwin();
 				printf("exit\n");
 				exit(0);

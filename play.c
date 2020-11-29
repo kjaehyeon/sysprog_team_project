@@ -4,9 +4,10 @@
 #include <curses.h>
 #include <sys/time.h>
 #include <signal.h>
+#include "edge_runner.h"
 
 int cur_score = 0;
-enum position {top, bottom, left, right, start}; //enum for runner's positon 
+//enum position {top, bottom, left, right, start}; //enum for runner's positon 
 typedef struct _location{
 	int x;
 	int y;
@@ -41,18 +42,22 @@ void handler(int signum){
 		runner->pos = right;
 		direction->x = 0;
 		direction->y = -1;
+		update_map(runner->pos);
 	}else if(runner->pos == right && runner->loc.y == 0){
 		runner->pos = top;
 		direction->x = -1;
 		direction->y = 0;
+		update_map(runner->pos);
 	}else if(runner->pos == top && runner->loc.x == 0){
 		runner->pos = left;
 		direction->x = 0;
 		direction->y = 1;
+		update_map(runner->pos);
 	}else if(runner->pos == left && runner->loc.y == LINES-1){
 		runner->pos = bottom;
 		direction->x = 1;
 		direction->y = 0;
+		update_map(runner->pos);
 	}
 }
 int set_ticker(int n_msecs){
@@ -77,7 +82,6 @@ void play(){
 	clear();
 	
 	char c;
-
 	signal(SIGALRM, handler);
 	direction = (location*)malloc(sizeof(location));
        	direction->x = 1;
@@ -86,6 +90,8 @@ void play(){
 	runner->pos = bottom;
 	runner->loc.x = 1;
 	runner->loc.y = LINES-1;// initialize runner
+	
+	update_map(start);
 
 	mvaddstr(runner->loc.y, runner->loc.x, "o");
 	set_ticker(50);
