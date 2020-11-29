@@ -11,7 +11,7 @@ enum state { start, in_play, help};//enum for store program state
 
 int main(void){
 	
-	printf("\033[8;50;100t");// set terminal size col = 100, row = 50
+	printf("\033[8;48;120t");// set terminal size col = 120, row = 48
 
 	char ch;
 	int play_retVal = 0; 
