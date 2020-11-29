@@ -29,15 +29,15 @@ int main(void){
 		ch = getch();
 		if(cur_state != in_play){	
 			if(ch == 'h' &&	cur_state == initial){
-				helpWin();
 				cur_state = help;
+				helpWin();
 			}
 			if(ch == 's' && cur_state == initial){	
 				cur_state = in_play;
 				play();
 		
 			//this code will activate after implementing play();
-		/*		play_retVal = play();
+				/*play_retVal = play();
 				if(play_retVal == 1){
 					cur_state = start;
 					startWin();
@@ -45,14 +45,14 @@ int main(void){
 			
 			}
 			if(ch == 'b' && cur_state == help){
+				cur_state = initial;
 				startWin();
-				cur_state = start;
 			}
 		
 			//test code from here
 			if(ch == 'b' && cur_state == in_play){
+				cur_state = initial;
 				startWin();
-				cur_state = start;
 			}
 			if(ch == 'e' && cur_state == initial){
 				endwin();
