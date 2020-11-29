@@ -92,4 +92,5 @@ void print_gameover(int* rank){
         addstr(" #####  #     # #     # #######    #######    #    ####### #     # ");
 refresh();
 endwin();
+
 }
