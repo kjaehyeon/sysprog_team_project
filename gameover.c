@@ -5,17 +5,27 @@
 void print_gameover();
 void save_score(int score);
 void open_file();
+
 int main(void){
 	int score = 1000;
+	int ranking_array[10];
 	initscr();	
+	save_score(score);
 	print_gameover();
 	open_file();
 	refresh();
-	getch();
-	endwin();
 }
 
-void open_file(){
+void save_score(int score){
+	FILE* fp;
+	fp = fopen("test.txt","w+");
+	if(fp!=NULL){
+		fprintf("%d",score,fp);
+	}
+	fclose(fp);
+}
+
+void open_file(int* ranking_array){
 	char buffer[BUFFER_SIZE+1];
 	FILE* fp;
 	int cnt = 0;
@@ -33,7 +43,6 @@ void open_file(){
 		cnt +=1;
 	}
 	fclose(fp);
-	
 }	
 
 void print_gameover(){
