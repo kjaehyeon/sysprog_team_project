@@ -24,19 +24,6 @@ int left_map[SCREEN_HEIGHT] = {0,};
 int right_map[SCREEN_HEIGHT] = {0,};
 
 
-/*int main(){
-	enum position pos;
-	pos = start;
-	initscr();
-	clear();
-	update_map(pos);
-	sleep(1);
-	for(int i = 0; i < 10; i++){
-		update_map(i%4);
-		sleep(1);
-	}
-	endwin();
-}*/
 
 void generate_random_map(enum position pos, int map[]){
 	// 1 : moster 2: hurdle 3: tree
