@@ -1,5 +1,6 @@
+enum position{bottom,right,top,left,start};
 void startWin();
 int gameover(int);
-int play();
+void play();
 void helpWin();
-
+void update_map(enum position);
