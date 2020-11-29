@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <curses.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,7 +10,7 @@ enum state { start, in_play, help};//enum for store program state
 
 int main(void){
 	
-	printf("\033[8;48;120t");// set terminal size col = 120, row = 48
+	printf("\033[8;50;120t");// set terminal size col = 120, row = 50
 
 	char ch;
 	int play_retVal = 0; 
@@ -28,40 +27,39 @@ int main(void){
 
 	while(1){
 		ch = getch();
+		if(cur_state != in_play){	
+			if(ch == 'h' &&	cur_state == start){
+				helpWin();
+				cur_state = help;
+			}
+			if(ch == 's' && cur_state == start){	
+				cur_state = in_play;
+				play();
 		
-		if(ch == 'h' &&	cur_state == start){
-			helpWin();
-			cur_state = help;
-		}
-		if(ch == 's' && cur_state == start){	
-			cur_state = in_play;
-			play();
-		
-		//this code will activate after implementing play();
-		/*	play_retVal = play();
-
-			if(play_retVal == 1){
-				cur_state = start;
-				startWin();
-			}else exit(0);*/
+			//this code will activate after implementing play();
+		/*		play_retVal = play();
+				if(play_retVal == 1){
+					cur_state = start;
+					startWin();
+				}else exit(0);*/
 			
-		}
-		if(ch == 'b' && cur_state == help){
-			startWin();
-			cur_state = start;
-		}
+			}
+			if(ch == 'b' && cur_state == help){
+				startWin();
+				cur_state = start;
+			}
 		
-		//test code from here
-		if(ch == 'b' && cur_state == in_play){
-			startWin();
-			cur_state = start;
+			//test code from here
+			if(ch == 'b' && cur_state == in_play){
+				startWin();
+				cur_state = start;
+			}
+			if(ch == 'e' && cur_state == start){
+				endwin();
+				printf("exit\n");
+				exit(0);
+			}
+			//to here
 		}
-		if(ch == 'e' && cur_state == start){
-			endwin();
-			printf("exit\n");
-			exit(0);
-		}
-		//to here
-
 	}
 }
