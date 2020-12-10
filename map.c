@@ -9,7 +9,7 @@
 #define SCREEN_HEIGHT 50
 
 
-//enum position {bottom,right,top,left,start};
+/*enum position {bottom,right,top,left,start};*/
 
 void update_map();
 void generate_random_map(enum position, int[]);
