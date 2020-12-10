@@ -6,14 +6,23 @@
 #include <signal.h>
 #include "edge_runner.h"
 
+int **totalmap;
+
+extern int* bottom_map;
+extern int* top_map;
+extern int* left_map;
+extern int* right_map;
+
 int cur_score = 0;
 //enum position {top, bottom, left, right, start}; //enum for runner's positon 
+enum action {attack, jump, slide, run};
 typedef struct _location{
 	int x;
 	int y;
 }location;
 typedef struct _Runner{
 	enum position pos;
+	enum action act;
 	location loc;
 }Runner;
 
@@ -52,8 +61,9 @@ void down(){
         if(runner->pos == left)
                  direction->x = -2;
 }
-void jump(){
+void jumping(){
 	set_ticker(0);
+	runner->act = jump;
 	up();
 	draw_runner(runner);
 	usleep(50000);
@@ -76,6 +86,7 @@ void jump(){
 	draw_runner(runner);
 	usleep(50000);
 	forward();
+	runner->act = run;
 	set_ticker(50);
 }
 void draw_score(){
@@ -111,23 +122,30 @@ void draw_runner(Runner* runner){
 
 	runner->loc.x += direction->x;
 	runner->loc.y += direction->y;
-
+	
 	if(runner->loc.x >= COLS){
 		runner->loc.x = COLS-1;
+		runner->act = run;
 		set_ticker(50);
 	}
 	if(runner->loc.x < 0){
 		runner->loc.x = 1;
+		runner->act = run;
 		set_ticker(50);
 	}
 	if(runner->loc.y > LINES-1){
 		runner->loc.y = LINES-1;
+		runner->act = run;
 		set_ticker(50);
 	}
 	if(runner->loc.y < 0){
 		runner->loc.y = 1;
+		runner->act = run;
 		set_ticker(50);
 	}
+
+
+	
 	if(runner->pos == top){
 		mvaddstr(runner->loc.y, runner->loc.x,"Z");
 		mvaddstr(runner->loc.y+1, runner->loc.x,"o");
@@ -150,6 +168,7 @@ void draw_runner(Runner* runner){
 }
 void handler(int signum){
 	draw_runner(runner);
+
 	if(runner->pos == bottom  && runner->loc.x == COLS-1){
 		runner->pos = right;
 		direction->x = 0;
@@ -189,6 +208,12 @@ int set_ticker(int n_msecs){
 
 void play(){
 	char c;
+	totalmap = (int**)malloc(sizeof(int*) * 4);
+	totalmap[bottom] = bottom_map;
+	totalmap[right] = right_map;
+	totalmap[top] = top_map;
+	totalmap[left] = left_map;
+
 	clear();
 	
 	signal(SIGALRM, handler);
@@ -199,7 +224,8 @@ void play(){
 	runner->pos = bottom;
 	runner->loc.x = 1;
 	runner->loc.y = LINES-1;// initialize runner
-	
+	runner->act = run;
+
 	update_map(start);
 
 	mvaddstr(runner->loc.y, runner->loc.x, "o");
@@ -207,7 +233,7 @@ void play(){
 	while(1){
 		c = getch();
 		if(c == ' '){
-			jump();
+			jumping();
 		}
 		if(c == 'a'){
 			//attack

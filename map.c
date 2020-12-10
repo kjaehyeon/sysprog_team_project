@@ -26,7 +26,7 @@ int right_map[SCREEN_HEIGHT] = {0,};
 
 
 void generate_random_map(enum position pos, int map[]){
-	// 1 : mosnter 2: tree 3: hurdle
+	// 1 : monster 2: tree 3: hurdle
 	int arrlen;
 	srand(time(NULL));
 	
@@ -95,10 +95,10 @@ void create_left_map(){
 		mvaddstr(i,0,"    ");
 	}
 	for(int i = 0 ; i < SCREEN_HEIGHT ; i++){
-		tmp = left_map[i] + '0';
-		if(tmp == '2')
+		tmp = left_map[i];
+		if(tmp == 2)
 			mvaddstr(i, 0 ,"-++");
-		else if(tmp == '3'){
+		else if(tmp == 3){
 			mvaddstr(i, 0, "   |");
 			mvaddstr(i-1, 0, "   |");
 			mvaddstr(i-2, 0, "   |");
@@ -111,10 +111,10 @@ void create_right_map(){
 		mvaddstr(i,COLS-4,"    ");
 	}
 	for(int i = 0 ; i < SCREEN_HEIGHT ; i++){
-		tmp = right_map[i] + '0';
-		if(tmp == '2')
+		tmp = right_map[i];
+		if(tmp == 2)
 			mvaddstr(i,COLS-3 , "++-");
-		else if(tmp == '3'){
+		else if(tmp == 3){
 			mvaddstr(i,COLS-3,"|   ");
 			mvaddstr(i-1,COLS-3,"|   ");
 			mvaddstr(i-2,COLS-3,"|   ");
@@ -132,18 +132,18 @@ void create_top_map(){
 		mvaddstr(2,i,"     ");
 	}
 	for(int i =0;i<SCREEN_WIDTH;i++){
-		tmp = top_map[i]+'0';
-		if(tmp == '1'){
+		tmp = top_map[i];
+		if(tmp == 1){
 			mvaddstr(0, i, " | / ");
 			mvaddstr(1, i,"-(@)-");
 			mvaddstr(2, i," @ @ ");
 		}
-		if(tmp == '2'){
+		if(tmp == 2){
 			mvaddstr(0,i," | ");
 			mvaddstr(1,i," + ");
 			
 		}
-		if(tmp == '3'){
+		if(tmp == 3){
 			mvaddstr(1,i,"----");
 		}
 	}
@@ -157,17 +157,17 @@ void create_bottom_map(){
                 mvaddstr(LINES -3,i,"    ");
 	}
 	for(int i = 0 ; i < SCREEN_WIDTH ; i++){
-		tmp = bottom_map[i] + '0';
-		if(tmp == '1'){
+		tmp = bottom_map[i];
+		if(tmp == 1){
 			mvaddstr(LINES-1, i," / | ");
 			mvaddstr(LINES-2, i,"-(@)-");
 			mvaddstr(LINES-3, i," @ @ ");
 		}
-		if(tmp == '2'){
+		if(tmp == 2){
 			mvaddstr(LINES-1, i, " | ");
-			mvaddstr(LINES-2, i," + "); 
+			mvaddstr(LINES-2, i," + ");
 		}
-		if(tmp == '3'){
+		if(tmp == 3){
 			mvaddstr(LINES-2,i,"----");
 		}
 	}
