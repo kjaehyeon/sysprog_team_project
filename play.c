@@ -34,6 +34,7 @@ void run_runner(Runner*);
 void attack_runner(Runner*);
 void slide_runner(Runner*);
 void draw_runner(Runner*);
+void checking();
 void up(){
 	if(runner->pos == bottom)
 		direction->y = -1;
@@ -69,27 +70,37 @@ void jumping(){
 	runner->act = jump;
 	up();
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	forward();
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	down();
 	draw_runner(runner);
+	checking();
 	usleep(50000);	
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	draw_runner(runner);
+	checking();
 	usleep(50000);
 	forward();
 	runner->act = run;
+	checking();
 	set_ticker(50);
 }
 void draw_score(){
@@ -165,6 +176,9 @@ void draw_runner(Runner* runner){
 			run_runner(runner);
 			break;
 	}	
+
+}
+void checking(){
 	int tmp;
 	if(runner->pos == top){
 				
@@ -212,6 +226,7 @@ void draw_runner(Runner* runner){
 
 	}
 
+
 }
 void run_runner(Runner* runner){
 	if(runner->pos == top){
@@ -256,6 +271,7 @@ void slide_runner(Runner* runner){
 }
 void handler(int signum){
 	draw_runner(runner);
+	checking();
 /*	int tmp;
 	if(runner->pos == top){
 				

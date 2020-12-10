@@ -35,7 +35,7 @@ void gameover(int score){
                 addstr(temp);
         }
 	refresh();
-	//endwin();
+	endwin();
 }
 
 void save_score(int score){
@@ -91,7 +91,7 @@ void print_gameover(int* rank){
         addstr("#     # #     # #     # #          #     #   # #   #       #    #");
         move(16,COLS/2-40);
         addstr(" #####  #     # #     # #######    #######    #    ####### #     # ");
-refresh();
-endwin();
+	refresh();
+	//endwin();
 
 }
