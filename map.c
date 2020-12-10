@@ -38,7 +38,7 @@ void generate_random_map(enum position pos, int map[]){
 	
 	for(int i = 0; i < arrlen; i++){
 		int random = rand()%4;
-		if(i > 5 && i < arrlen -5){
+		if(i > 10  && i < arrlen -10){
 			map[i] = random;
 			switch(random){
 				case 1:

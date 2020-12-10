@@ -10,9 +10,10 @@ int rank[10];
 void print_gameover();
 void save_score(int score);
 void open_file();
-void gameover(){
-	int score = 3000;
-	initscr();	
+void gameover(int score){
+	
+	clear();
+
 	save_score(score);
 	print_gameover();
 	int i = 0;
@@ -34,7 +35,7 @@ void gameover(){
                 addstr(temp);
         }
 	refresh();
-	endwin();
+	//endwin();
 }
 
 void save_score(int score){
