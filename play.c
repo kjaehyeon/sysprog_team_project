@@ -88,7 +88,9 @@ void draw_score(){
 void draw_runner(Runner* runner){
 	cur_score++;
 	draw_score();
+	
 	mvaddstr(runner->loc.y, runner->loc.x, " ");
+
 	runner->loc.x += direction->x;
 	runner->loc.y += direction->y;
 
