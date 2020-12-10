@@ -102,8 +102,18 @@ void draw_score(){
 void draw_runner(Runner* runner){
 	cur_score++;
 	draw_score();
-	if(runner->act = slide)
+	if(runner->act == slide){
+		/*if(runner->pos == top)
+			mvaddstr(runner->loc.y+1, runner->loc.x+1," ");
+		else if(runner->pos == bottom)
+			mvaddstr(runner->loc.y-1, runner->loc.x-1," ");
+		else if(runner->pos == right)
+			mvaddstr(runner->loc.y+1, runner->loc.x-2, "  ");
+		else
+			mvaddstr(runner->loc.y-1, runner->loc.x+1, "  ");
+*/
 		mvaddstr(runner->loc.y,runner->loc.x," ");
+	}
 	else{
 		if(runner->pos == top){
 			mvaddstr(runner->loc.y, runner->loc.x, "   ");
@@ -285,20 +295,31 @@ void play(){
 			//attack
 		}	
 		if(c == 's'){
+			if(runner->pos == top)
+				mvaddstr(runner->loc.y+1, runner->loc.x," ");
+			else if(runner->pos == bottom)
+				mvaddstr(runner->loc.y-1, runner->loc.x," ");
+			else if(runner->pos == right)
+				mvaddstr(runner->loc.y, runner->loc.x-2, "  ");
+			else
+				mvaddstr(runner->loc.y, runner->loc.x+1, "  ");
+
 			set_ticker(0);
 			runner->act = slide;
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
 			draw_runner(runner);
-			usleep(35000);
+			usleep(25000);
+			draw_runner(runner);
+			usleep(25000);
 			runner->act = run;
 			set_ticker(50);
 			//slide
