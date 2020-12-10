@@ -143,12 +143,9 @@ void draw_runner(Runner* runner){
 		runner->act = run;
 		set_ticker(50);
 	}
-<<<<<<< HEAD
 
-	mvaddstr(runner->loc.y, runner->loc.x, "o");
 
 	
-=======
 	if(runner->pos == top){
 		mvaddstr(runner->loc.y, runner->loc.x,"Z");
 		mvaddstr(runner->loc.y+1, runner->loc.x,"o");
@@ -167,7 +164,6 @@ void draw_runner(Runner* runner){
 		mvaddstr(runner->loc.y,runner->loc.x,"Z");
 		mvaddstr(runner->loc.y-1,runner->loc.x,"o");
 	}
->>>>>>> a825e2c5d84896f024263e9f0faea26eac845f7b
 	refresh();
 }
 void handler(int signum){
