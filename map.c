@@ -99,7 +99,9 @@ void create_left_map(){
 		if(tmp == '2')
 			mvaddstr(i, 0 ,"-++");
 		else if(tmp == '3'){
-			mvaddstr(i, 0, "  |");
+			mvaddstr(i, 0, "   |");
+			mvaddstr(i-1, 0, "   |");
+			mvaddstr(i-2, 0, "   |");
 		}
 	}
 }
@@ -114,6 +116,8 @@ void create_right_map(){
 			mvaddstr(i,COLS-3 , "++-");
 		else if(tmp == '3'){
 			mvaddstr(i,COLS-3,"|   ");
+			mvaddstr(i-1,COLS-3,"|   ");
+			mvaddstr(i-2,COLS-3,"|   ");
 		}
 
 	}
@@ -140,7 +144,7 @@ void create_top_map(){
 			mvaddstr(2,i," * ");
 		}
 		if(tmp == '3'){
-			mvaddstr(1,i,"=");
+			mvaddstr(1,i,"----");
 		}
 	}
 }
@@ -165,7 +169,7 @@ void create_bottom_map(){
 			mvaddstr(LINES-3, i,"  *  ");
 		}
 		if(tmp == '3'){
-			mvaddstr(LINES-2,i,"=");
+			mvaddstr(LINES-2,i,"----");
 		}
 	}
 }
