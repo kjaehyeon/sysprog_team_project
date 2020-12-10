@@ -20,6 +20,64 @@ typedef struct _Runner{
 location *direction;
 Runner* runner;
 
+int set_ticker(int);
+void draw_runner(Runner*);
+void up(){
+	if(runner->pos == bottom)
+		direction->y = -1;
+	if(runner->pos == right)
+		direction->x = -2;
+	if(runner->pos == top)
+		direction->y = 1;
+	if(runner->pos == left)
+		direction->x = 2;	
+}
+void forward(){
+	if(runner->pos == bottom)
+		direction->y = 0;
+	if(runner->pos == right)
+		direction->x = 0;
+	if(runner->pos == top)
+		direction->y = 0;
+	if(runner->pos == left)
+		direction->x = 0;
+}
+void down(){
+	if(runner->pos == bottom)
+                 direction->y = 1;
+        if(runner->pos == right)
+                 direction->x = 2;
+        if(runner->pos == top)
+                 direction->y = -1;
+        if(runner->pos == left)
+                 direction->x = -2;
+}
+void jump(){
+	set_ticker(0);
+	up();
+	draw_runner(runner);
+	usleep(50000);
+	draw_runner(runner);
+	usleep(50000);
+	draw_runner(runner);
+	usleep(50000);
+	forward();
+	draw_runner(runner);
+	usleep(50000);
+	draw_runner(runner);
+	usleep(50000);
+	draw_runner(runner);
+	usleep(50000);
+	down();
+	draw_runner(runner);
+	usleep(50000);	
+	draw_runner(runner);
+	usleep(50000);
+	draw_runner(runner);
+	usleep(50000);
+	forward();
+	set_ticker(50);
+}
 void draw_score(){
 	char score[10];
 	sprintf(score, "%d",cur_score);
@@ -33,6 +91,24 @@ void draw_runner(Runner* runner){
 	mvaddstr(runner->loc.y, runner->loc.x, " ");
 	runner->loc.x += direction->x;
 	runner->loc.y += direction->y;
+
+	if(runner->loc.x >= COLS){
+		runner->loc.x = COLS-1;
+		set_ticker(50);
+	}
+	if(runner->loc.x < 0){
+		runner->loc.x = 1;
+		set_ticker(50);
+	}
+	if(runner->loc.y > LINES-1){
+		runner->loc.y = LINES-1;
+		set_ticker(50);
+	}
+	if(runner->loc.y < 0){
+		runner->loc.y = 1;
+		set_ticker(50);
+	}
+
 	mvaddstr(runner->loc.y, runner->loc.x, "o");
 	refresh();
 }
@@ -76,12 +152,9 @@ int set_ticker(int n_msecs){
 }
 
 void play(){
-	//initscr();
-	//crmode();
-	//noecho();
+	char c;
 	clear();
 	
-	char c;
 	signal(SIGALRM, handler);
 	direction = (location*)malloc(sizeof(location));
        	direction->x = 1;
@@ -95,11 +168,22 @@ void play(){
 
 	mvaddstr(runner->loc.y, runner->loc.x, "o");
 	set_ticker(50);
+	while(1){
+		c = getch();
+		if(c == ' '){
+			jump();
+		}
+		if(c == 'a'){
+			//attack
+		}	
+		if(c == 's'){
+			//slide
+		}
+		if(c == 'e'){
+			set_ticker(0);
+			gameover(cur_score);	
+		}
+	}
 	refresh();
-	c = getch();
-	if(c == 'e') endwin();
 
 }
-//int main(void){
-//	play();
-//}
