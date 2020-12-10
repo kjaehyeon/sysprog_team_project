@@ -30,6 +30,9 @@ location *direction;
 Runner* runner;
 
 int set_ticker(int);
+void run_runner(Runner*);
+void attack_runner(Runner*);
+void slide_runner(Runner*);
 void draw_runner(Runner*);
 void up(){
 	if(runner->pos == bottom)
@@ -100,18 +103,18 @@ void draw_runner(Runner* runner){
 	cur_score++;
 	draw_score();
 	if(runner->pos == top){
-		mvaddstr(runner->loc.y, runner->loc.x, " ");
-		mvaddstr(runner->loc.y+1, runner->loc.x," ");
-		mvaddstr(runner->loc.y+2, runner->loc.x," ");
-		mvaddstr(runner->loc.y+3, runner->loc.x," ");
-		mvaddstr(runner->loc.y+4, runner->loc.x," ");
+		mvaddstr(runner->loc.y, runner->loc.x, "   ");
+		mvaddstr(runner->loc.y+1, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y+2, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y+3, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y+4, runner->loc.x,"   ");
 	}
 	if(runner->pos == bottom){
-		mvaddstr(runner->loc.y, runner->loc.x," ");
-		mvaddstr(runner->loc.y-1, runner->loc.x," ");
-		mvaddstr(runner->loc.y-2, runner->loc.x," ");
-		mvaddstr(runner->loc.y-3, runner->loc.x," ");
-		mvaddstr(runner->loc.y-4, runner->loc.x," ");
+		mvaddstr(runner->loc.y, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y-1, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y-2, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y-3, runner->loc.x,"   ");
+		mvaddstr(runner->loc.y-4, runner->loc.x,"   ");
 	}
 	if(runner->pos == right){
 		mvaddstr(runner->loc.y,runner->loc.x-7,"        ");
@@ -144,27 +147,62 @@ void draw_runner(Runner* runner){
 		set_ticker(50);
 	}
 
-
 	
+	switch(runner->act){
+		case run:
+			run_runner(runner);
+			break;
+		case attack:
+			attack_runner(runner);
+			break;
+		case slide:
+			slide_runner(runner);
+			break;
+		case jump:
+			run_runner(runner);
+			break;
+	}	
+}
+void run_runner(Runner* runner){
 	if(runner->pos == top){
 		mvaddstr(runner->loc.y, runner->loc.x,"Z");
 		mvaddstr(runner->loc.y+1, runner->loc.x,"o");
 	}
 	if(runner->pos == right){
-		mvaddstr(runner->loc.y, runner->loc.x-2,"O");
-		mvaddstr(runner->loc.y, runner->loc.x-1,"-");
-		mvaddstr(runner->loc.y, runner->loc.x,"<");
+		mvaddstr(runner->loc.y, runner->loc.x-2,"o-<");
 	}
 	if(runner->pos == left){
-		mvaddstr(runner->loc.y, runner->loc.x,">");
-		mvaddstr(runner->loc.y, runner->loc.x+1,"-");
-		mvaddstr(runner->loc.y, runner->loc.x+2,"O");
+		mvaddstr(runner->loc.y, runner->loc.x,">-o");
 	}
 	if(runner->pos == bottom){
 		mvaddstr(runner->loc.y,runner->loc.x,"Z");
 		mvaddstr(runner->loc.y-1,runner->loc.x,"o");
 	}
 	refresh();
+
+}
+void attack_runner(Runner* runner){
+	if(runner->pos == top){
+		mvaddstr(runner->loc.y, runner->loc.x," Z");
+		mvaddstr(runner->loc.y+1, runner->loc.x-1,"((o");
+	}
+	if(runner->pos == right){
+		mvaddstr(runner->loc.y-1, runner->loc.x-2,"^  ");
+		mvaddstr(runner->loc.y, runner->loc.x-2,"o-<");
+	}
+	if(runner->pos == left){
+		mvaddstr(runner->loc.y, runner->loc.x,">-o");
+		mvaddstr(runner->loc.y+1, runner->loc.x,"  v");
+	}
+	if(runner->pos == bottom){
+		mvaddstr(runner->loc.y,runner->loc.x,"Z");
+		mvaddstr(runner->loc.y-1,runner->loc.x,"o))");
+	}
+	refresh();
+
+}
+void slide_runner(Runner* runner){
+	mvaddch(runner->loc.y, runner->loc.x, 'o');
 }
 void handler(int signum){
 	draw_runner(runner);
@@ -236,9 +274,31 @@ void play(){
 			jumping();
 		}
 		if(c == 'a'){
+			set_ticker(0);
+			runner->act = attack;
+			draw_runner(runner);
+			usleep(50000);
+			runner->act = run;
+			set_ticker(50);
 			//attack
 		}	
 		if(c == 's'){
+			set_ticker(0);
+			runner->act = slide;
+			draw_runner(runner);
+			usleep(35000);
+			draw_runner(runner);
+			usleep(35000);
+			draw_runner(runner);
+			usleep(35000);
+			draw_runner(runner);
+			usleep(35000);
+			draw_runner(runner);
+			usleep(35000);
+			draw_runner(runner);
+			usleep(35000);
+			runner->act = run;
+			set_ticker(50);
 			//slide
 		}
 		if(c == 'e'){
