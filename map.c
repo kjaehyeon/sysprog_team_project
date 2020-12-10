@@ -140,8 +140,8 @@ void create_top_map(){
 		}
 		if(tmp == '2'){
 			mvaddstr(0,i," | ");
-			mvaddstr(1,i,"***");
-			mvaddstr(2,i," * ");
+			mvaddstr(1,i," + ");
+			
 		}
 		if(tmp == '3'){
 			mvaddstr(1,i,"----");
@@ -164,9 +164,8 @@ void create_bottom_map(){
 			mvaddstr(LINES-3, i," @ @ ");
 		}
 		if(tmp == '2'){
-			mvaddstr(LINES-1, i, "  |  ");
-			mvaddstr(LINES-2, i," ***");
-			mvaddstr(LINES-3, i,"  *  ");
+			mvaddstr(LINES-1, i, " | ");
+			mvaddstr(LINES-2, i," + "); 
 		}
 		if(tmp == '3'){
 			mvaddstr(LINES-2,i,"----");
