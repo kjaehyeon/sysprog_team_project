@@ -102,27 +102,30 @@ void draw_score(){
 void draw_runner(Runner* runner){
 	cur_score++;
 	draw_score();
-	if(runner->pos == top){
-		mvaddstr(runner->loc.y, runner->loc.x, "   ");
-		mvaddstr(runner->loc.y+1, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y+2, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y+3, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y+4, runner->loc.x,"   ");
-	}
-	if(runner->pos == bottom){
-		mvaddstr(runner->loc.y, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y-1, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y-2, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y-3, runner->loc.x,"   ");
-		mvaddstr(runner->loc.y-4, runner->loc.x,"   ");
-	}
-	if(runner->pos == right){
-		mvaddstr(runner->loc.y,runner->loc.x-7,"        ");
-	}
-	if(runner->pos == left){
-		mvaddstr(runner->loc.y,runner->loc.x,"          ");
-	}
-
+	if(runner->act = slide)
+		mvaddstr(runner->loc.y,runner->loc.x," ");
+	else{
+		if(runner->pos == top){
+			mvaddstr(runner->loc.y, runner->loc.x, "   ");
+			mvaddstr(runner->loc.y+1, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y+2, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y+3, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y+4, runner->loc.x,"   ");
+		}
+		if(runner->pos == bottom){
+			mvaddstr(runner->loc.y, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y-1, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y-2, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y-3, runner->loc.x,"   ");
+			mvaddstr(runner->loc.y-4, runner->loc.x,"   ");
+		}
+		if(runner->pos == right){
+			mvaddstr(runner->loc.y,runner->loc.x-7,"        ");
+		}
+		if(runner->pos == left){
+			mvaddstr(runner->loc.y,runner->loc.x,"          ");
+		}
+	}	
 	runner->loc.x += direction->x;
 	runner->loc.y += direction->y;
 	
@@ -147,7 +150,6 @@ void draw_runner(Runner* runner){
 		set_ticker(50);
 	}
 
-	
 	switch(runner->act){
 		case run:
 			run_runner(runner);
