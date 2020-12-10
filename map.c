@@ -38,18 +38,37 @@ void generate_random_map(enum position pos, int map[]){
 	
 	for(int i = 0; i < arrlen; i++){
 		int random = rand()%4;
-		if(i > 10  && i < arrlen -10){
-			map[i] = random;
-			switch(random){
-				case 1:
-					i+= 20+ rand()%4;
-					break;
-				case 2:
-					i+= 20+ rand()%4;
-					break;
-				case 3:
-					i+= 20 + rand()%4;
-					break;
+		if(i > 12  && i < arrlen -12){
+			if(random ==3){
+				map[i-1] = random;
+				map[i] = random;
+				map[i+1] = random;
+			}else
+				map[i] = random;
+			if(pos == right || pos == left){
+				switch(random){
+					case 1:
+						i+= 30+ rand()%4;
+						break;
+					case 2:
+						i+= 30+ rand()%4;
+						break;
+					case 3:
+						i+= 30 + rand()%4;
+						break;
+				}
+			}else{
+				switch(random){
+					case 1:
+						i+= 15+ rand()%2;
+						break;
+					case 2:
+						i+= 15+ rand()%2;
+						break;
+					case 3:
+						i+= 15 + rand()%2;
+						break;
+				}
 			}
 		}
 	}			
@@ -100,8 +119,8 @@ void create_left_map(){
 			mvaddstr(i, 0 ,"-++");
 		else if(tmp == 3){
 			mvaddstr(i, 0, "   |");
-			mvaddstr(i-1, 0, "   |");
-			mvaddstr(i-2, 0, "   |");
+			//mvaddstr(i-1, 0, "   |");
+			//mvaddstr(i-2, 0, "   |");
 		}
 	}
 }
@@ -116,8 +135,8 @@ void create_right_map(){
 			mvaddstr(i,COLS-3 , "++-");
 		else if(tmp == 3){
 			mvaddstr(i,COLS-3,"|   ");
-			mvaddstr(i-1,COLS-3,"|   ");
-			mvaddstr(i-2,COLS-3,"|   ");
+			//mvaddstr(i-1,COLS-3,"|   ");
+			//mvaddstr(i-2,COLS-3,"|   ");
 		}
 
 	}
@@ -144,7 +163,7 @@ void create_top_map(){
 			
 		}
 		if(tmp == 3){
-			mvaddstr(2,i,"---");
+			mvaddstr(2,i,"-");
 		}
 	}
 }
@@ -168,7 +187,7 @@ void create_bottom_map(){
 			mvaddstr(LINES-2, i," + ");
 		}
 		if(tmp == 3){
-			mvaddstr(LINES-3,i,"---");
+			mvaddstr(LINES-3,i,"-");
 		}
 	}
 }

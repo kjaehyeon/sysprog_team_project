@@ -8,10 +8,10 @@
 
 int **totalmap;
 
-extern int* bottom_map;
-extern int* top_map;
-extern int* left_map;
-extern int* right_map;
+extern int bottom_map[];
+extern int top_map[];
+extern int left_map[];
+extern int right_map[];
 
 int cur_score = 0;
 //enum position {top, bottom, left, right, start}; //enum for runner's positon 
@@ -103,15 +103,6 @@ void draw_runner(Runner* runner){
 	cur_score++;
 	draw_score();
 	if(runner->act == slide){
-		/*if(runner->pos == top)
-			mvaddstr(runner->loc.y+1, runner->loc.x+1," ");
-		else if(runner->pos == bottom)
-			mvaddstr(runner->loc.y-1, runner->loc.x-1," ");
-		else if(runner->pos == right)
-			mvaddstr(runner->loc.y+1, runner->loc.x-2, "  ");
-		else
-			mvaddstr(runner->loc.y-1, runner->loc.x+1, "  ");
-*/
 		mvaddstr(runner->loc.y,runner->loc.x," ");
 	}
 	else{
@@ -174,6 +165,53 @@ void draw_runner(Runner* runner){
 			run_runner(runner);
 			break;
 	}	
+	int tmp;
+	if(runner->pos == top){
+				
+	}else if(runner->pos == bottom){
+		tmp = totalmap[bottom][runner->loc.x];
+		if(tmp != 0){
+			switch(tmp){
+				case 1:	
+					break;
+				case 2:
+					if(runner->loc.y >= LINES-3){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}	
+					break;	
+			}
+		}
+	}else if(runner->pos == right){
+		tmp = totalmap[right][runner->loc.y];
+		if( tmp != 0){
+			switch(tmp){
+				case 1:
+					break;
+				case 2:
+					if(runner->loc.x >= COLS-4){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+			}
+		}
+	}else{
+
+	}
+
 }
 void run_runner(Runner* runner){
 	if(runner->pos == top){
@@ -218,6 +256,53 @@ void slide_runner(Runner* runner){
 }
 void handler(int signum){
 	draw_runner(runner);
+/*	int tmp;
+	if(runner->pos == top){
+				
+	}else if(runner->pos == bottom){
+		tmp = totalmap[bottom][runner->loc.x];
+		if(tmp != 0){
+			switch(tmp){
+				case 1:	
+					break;
+				case 2:
+					if(runner->loc.y >= LINES-3){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}	
+					break;	
+			}
+		}
+	}else if(runner->pos == right){
+		tmp = totalmap[right][runner->loc.y];
+		if( tmp != 0){
+			switch(tmp){
+				case 1:
+					break;
+				case 2:
+					if(runner->loc.x >= COLS-4){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+			}
+		}
+	}else{
+
+	}*/
+	
 
 	if(runner->pos == bottom  && runner->loc.x == COLS-1){
 		runner->pos = right;
@@ -259,11 +344,7 @@ int set_ticker(int n_msecs){
 void play(){
 	char c;
 	totalmap = (int**)malloc(sizeof(int*) * 4);
-	totalmap[bottom] = bottom_map;
-	totalmap[right] = right_map;
-	totalmap[top] = top_map;
-	totalmap[left] = left_map;
-
+	
 	clear();
 	
 	signal(SIGALRM, handler);
@@ -277,6 +358,18 @@ void play(){
 	runner->act = run;
 
 	update_map(start);
+
+	totalmap[bottom] = (int*)malloc(sizeof(int) * 120);
+	totalmap[top] = (int*)malloc(sizeof(int) * 120);
+	totalmap[right] = (int*)malloc(sizeof(int) * 50);
+	totalmap[left] = (int*)malloc(sizeof(int) * 50);
+
+	totalmap[bottom] = bottom_map;
+	totalmap[right] = right_map;
+	totalmap[top] = top_map;
+	totalmap[left] = left_map;
+	
+
 
 	mvaddstr(runner->loc.y, runner->loc.x, "o");
 	set_ticker(50);
@@ -306,6 +399,8 @@ void play(){
 
 			set_ticker(0);
 			runner->act = slide;
+			draw_runner(runner);
+			usleep(25000);
 			draw_runner(runner);
 			usleep(25000);
 			draw_runner(runner);
