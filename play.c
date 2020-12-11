@@ -99,6 +99,7 @@ void jumping(){
 	checking();
 	usleep(50000);
 	forward();
+	checking();
 	runner->act = run;
 	set_ticker(50);
 }
@@ -180,7 +181,26 @@ void draw_runner(Runner* runner){
 void checking(){
 	int tmp;
 	if(runner->pos == top){
-				
+		tmp = totalmap[top][runner->loc.x];
+		if(tmp != 0){
+			switch(tmp){
+				case 1:
+					
+					break;
+				case 2:
+					if(runner->loc.y < 3){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+			}
+		}		
 	}else if(runner->pos == bottom){
 		tmp = totalmap[bottom][runner->loc.x];
 		if(tmp != 0){
@@ -222,7 +242,25 @@ void checking(){
 			}
 		}
 	}else{
-
+		tmp = totalmap[left][runner->loc.y];
+		if(tmp != 0){
+			switch(tmp){
+				case 1:
+					break;
+				case 2:
+					if(runner->loc.x < 4){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+				case 3:
+					if(runner->act != slide){
+						set_ticker(0);
+						gameover(cur_score);
+					}
+					break;
+			}
+		}
 	}
 
 
@@ -391,6 +429,7 @@ void play(){
 			draw_runner(runner);
 			checking();
 			usleep(25000);
+			draw_runner(runner);
 			checking();
 			runner->act = run;
 			set_ticker(50);
