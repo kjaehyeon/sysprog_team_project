@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <curses.h>
 #include <string.h>
 #define BUFFER_SIZE 256
@@ -11,9 +12,10 @@ void print_gameover();
 void save_score(int score);
 void open_file();
 void gameover(int score){
-	
-	clear();
+	int c;
 
+	clear();
+	
 	save_score(score);
 	print_gameover();
 	int i = 0;
@@ -35,7 +37,13 @@ void gameover(int score){
                 addstr(temp);
         }
 	refresh();
-	endwin();
+	while(1){
+		c = getch();
+		if(c == 'e'){
+			endwin();
+			exit(0);
+		}
+	}
 }
 
 void save_score(int score){

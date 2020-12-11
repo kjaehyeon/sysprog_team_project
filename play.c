@@ -100,7 +100,6 @@ void jumping(){
 	usleep(50000);
 	forward();
 	runner->act = run;
-	checking();
 	set_ticker(50);
 }
 void draw_score(){
@@ -272,54 +271,7 @@ void slide_runner(Runner* runner){
 void handler(int signum){
 	draw_runner(runner);
 	checking();
-/*	int tmp;
-	if(runner->pos == top){
-				
-	}else if(runner->pos == bottom){
-		tmp = totalmap[bottom][runner->loc.x];
-		if(tmp != 0){
-			switch(tmp){
-				case 1:	
-					break;
-				case 2:
-					if(runner->loc.y >= LINES-3){
-						set_ticker(0);
-						gameover(cur_score);
-					}
-					break;
-				case 3:
-					if(runner->act != slide){
-						set_ticker(0);
-						gameover(cur_score);
-					}	
-					break;	
-			}
-		}
-	}else if(runner->pos == right){
-		tmp = totalmap[right][runner->loc.y];
-		if( tmp != 0){
-			switch(tmp){
-				case 1:
-					break;
-				case 2:
-					if(runner->loc.x >= COLS-4){
-						set_ticker(0);
-						gameover(cur_score);
-					}
-					break;
-				case 3:
-					if(runner->act != slide){
-						set_ticker(0);
-						gameover(cur_score);
-					}
-					break;
-			}
-		}
-	}else{
-
-	}*/
 	
-
 	if(runner->pos == bottom  && runner->loc.x == COLS-1){
 		runner->pos = right;
 		direction->x = 0;
@@ -416,21 +368,30 @@ void play(){
 			set_ticker(0);
 			runner->act = slide;
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
 			draw_runner(runner);
+			checking();
 			usleep(25000);
+			checking();
 			runner->act = run;
 			set_ticker(50);
 			//slide
