@@ -40,7 +40,6 @@ int main(void){
 				startWin();
 			}
 		
-			//test code from here
 			if(ch == 'b' && cur_state == in_play){
 				cur_state = initial;
 				startWin();
@@ -50,7 +49,6 @@ int main(void){
 				printf("exit\n");
 				exit(0);
 			}
-			//to here
 		}
 	}
 }
