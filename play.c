@@ -14,7 +14,6 @@ extern int left_map[];
 extern int right_map[];
 
 int cur_score = 0;
-//enum position {top, bottom, left, right, start}; //enum for runner's positon 
 enum action {attack, jump, slide, run};
 typedef struct _location{
 	int x;

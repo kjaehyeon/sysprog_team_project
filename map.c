@@ -9,7 +9,6 @@
 #define SCREEN_HEIGHT 50
 
 
-/*enum position {bottom,right,top,left,start};*/
 
 void update_map();
 void generate_random_map(enum position, int[]);
@@ -119,8 +118,6 @@ void create_left_map(){
 			mvaddstr(i, 0 ,"-++");
 		else if(tmp == 3){
 			mvaddstr(i, 0, "   |");
-			//mvaddstr(i-1, 0, "   |");
-			//mvaddstr(i-2, 0, "   |");
 		}
 	}
 }
@@ -135,8 +132,6 @@ void create_right_map(){
 			mvaddstr(i,COLS-3 , "++-");
 		else if(tmp == 3){
 			mvaddstr(i,COLS-3,"|   ");
-			//mvaddstr(i-1,COLS-3,"|   ");
-			//mvaddstr(i-2,COLS-3,"|   ");
 		}
 
 	}
