@@ -51,9 +51,9 @@ void save_score(int score){
 	FILE* fp;
 	int i=0;
 	int tmp;
-	fp = fopen("test.txt","r+");
+	fp = fopen("ranking.txt","r+");
 	if(fp == 0){
-		fp = fopen("test.txt","w+");
+		fp = fopen("ranking.txt","w+");
 		fprintf(fp,"%d",score);
 	}
 	else{
@@ -72,7 +72,7 @@ void save_score(int score){
 	}
 
 	fclose(fp);
-	fp = fopen("test.txt","w+");
+	fp = fopen("ranking.txt","w+");
 	i = 0;
 	for(i=0;i<10;i++){
 		fprintf(fp,"%d ",rank[i]);
