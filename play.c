@@ -185,7 +185,10 @@ void checking(){
 		if(tmp != 0){
 			switch(tmp){
 				case 1:
-					
+					if(runner->act != attack){
+                                        	set_ticker(0);
+                                        	gameover(cur_score);
+                                        }
 					break;
 				case 2:
 					if(runner->loc.y < 3){
@@ -205,7 +208,11 @@ void checking(){
 		tmp = totalmap[bottom][runner->loc.x];
 		if(tmp != 0){
 			switch(tmp){
-				case 1:	
+				case 1:
+					if(runner->act != attack){
+						set_ticker(0);
+						gameover(cur_score);
+					}	
 					break;
 				case 2:
 					if(runner->loc.y >= LINES-3){
@@ -385,10 +392,42 @@ void play(){
 			jumping();
 		}
 		if(c == 'a'){
+			if(runner->pos == top){
+                                mvaddstr(runner->loc.y, runner->loc.x-1," ");
+				mvaddstr(runner->loc.y+1, runner->loc.x-1," ");
+				mvaddstr(runner->loc.y+2, runner->loc.x-1," ");
+			}
+                        else if(runner->pos == bottom){
+				mvaddstr(runner->loc.y-2, runner->loc.x+1," ");
+                                mvaddstr(runner->loc.y-1, runner->loc.x+1," ");
+				mvaddstr(runner->loc.y, runner->loc.x+1," ");
+			}
 			set_ticker(0);
 			runner->act = attack;
 			draw_runner(runner);
+			checking();
 			usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
+			draw_runner(runner);
+                        checking();
+                        usleep(50000);
 			runner->act = run;
 			set_ticker(50);
 			//attack
