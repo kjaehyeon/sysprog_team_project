@@ -8,17 +8,14 @@
 
 enum state { initial, in_play, help};//enum for store program state
 
+
 int main(void){
 	
 	printf("\033[8;50;120t");// set terminal size col = 120, row = 50
 
 	char ch;
-	int play_retVal = 0; 
 	enum state cur_state = initial;
 	
-	//int flag = fcntl(0, F_GETFL);
-	//flag |= O_NONBLOCK;
-	//fcntl(0, F_SETFL, flag);
 
 	initscr();
 	crmode();
@@ -36,13 +33,7 @@ int main(void){
 				cur_state = in_play;
 				play();
 		
-			//this code will activate after implementing play();
-				/*play_retVal = play();
-				if(play_retVal == 1){
-					cur_state = start;
-					startWin();
-				}else exit(0);*/
-			
+					
 			}
 			if(ch == 'b' && cur_state == help){
 				cur_state = initial;

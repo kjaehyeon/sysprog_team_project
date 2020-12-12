@@ -83,10 +83,8 @@ void save_score(int score){
  
 void print_gameover(int* rank){
         clear();
-	int i = 0;
-	char temp[10];
-
-        move(10,COLS/2-40);
+	
+	move(10, COLS/2-40);
         addstr(" #####     #    #     # #######    ####### #     # ####### ###### ");
         move(11,COLS/2-40);
         addstr("#     #   # #   ##   ## #          #     # #     # #       #     #");
@@ -101,6 +99,5 @@ void print_gameover(int* rank){
         move(16,COLS/2-40);
         addstr(" #####  #     # #     # #######    #######    #    ####### #     # ");
 	refresh();
-	//endwin();
 
 }
