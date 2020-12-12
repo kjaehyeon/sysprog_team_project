@@ -25,6 +25,8 @@ int right_map[SCREEN_HEIGHT] = {0,};
 
 
 
+
+
 void generate_random_map(enum position pos, int map[]){
 	// 1 : monster 2: tree 3: hurdle
 	int arrlen;
@@ -115,8 +117,9 @@ void create_left_map(){
 	}
 	for(int i = 0 ; i < SCREEN_HEIGHT ; i++){
 		tmp = left_map[i];
-		if(tmp == 2)
+		if(tmp == 2){
 			mvaddstr(i, 0 ,"-++");
+		}
 		else if(tmp == 3){
 			mvaddstr(i, 0, "   |");
 			//mvaddstr(i-1, 0, "   |");
@@ -131,8 +134,9 @@ void create_right_map(){
 	}
 	for(int i = 0 ; i < SCREEN_HEIGHT ; i++){
 		tmp = right_map[i];
-		if(tmp == 2)
+		if(tmp == 2){
 			mvaddstr(i,COLS-3 , "++-");
+		}
 		else if(tmp == 3){
 			mvaddstr(i,COLS-3,"|   ");
 			//mvaddstr(i-1,COLS-3,"|   ");

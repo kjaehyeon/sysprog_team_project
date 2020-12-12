@@ -9,12 +9,9 @@ void save_score(int score);
 void open_file();
 
 int rank[10];
-void print_gameover();
-void save_score(int score);
-void open_file();
 void gameover(int score){
 	int c;
-	sleep(1);
+	
 	clear();
 	
 	save_score(score);
@@ -81,7 +78,7 @@ void save_score(int score){
 	fclose(fp);
 }
  
-void print_gameover(int* rank){
+void print_gameover(){
         clear();
 	int i = 0;
 	char temp[10];

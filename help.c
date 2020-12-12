@@ -21,15 +21,15 @@ void  helpWin(){
 	move(24,50);
 	addstr("Obstacles and Monsters are randomly spawn.");
 	move(30,COLS/2-35);
-	addstr(" * ");
+	addstr(" + ");
 	move(31,COLS/2-35);
-	addstr("***");
+	addstr(" + ");
 	move(32,COLS/2-35);
 	addstr(" | "); 
 	move(31,COLS/2-30);
 	addstr("Jump -press 'space bar' when you meet tree");
 	move(35,COLS/2-36);
-	addstr(" o o ");
+	addstr(" @ @ ");
 	move(36,COLS/2-36);
 	addstr("-(@)-");
 	move(37,COLS/2-36);
@@ -37,13 +37,7 @@ void  helpWin(){
 	move(36,COLS/2-29);
 	addstr("Attack - press 'a' when you meet monster");
 	move(40,COLS/2-35);
-	addstr("====");
-	move(41,COLS/2-35);
-	addstr("|  |");
-	move(42,COLS/2-35);
-	addstr("|  |");
-	move(43,COLS/2-35);
-	addstr("|  |");
+	addstr("---");
 	move(41,COLS/2-30);
 	addstr("Slide - press 's' when you meet hurdle");
 	

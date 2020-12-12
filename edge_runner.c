@@ -16,10 +16,6 @@ int main(void){
 	int play_retVal = 0; 
 	enum state cur_state = initial;
 	
-	//int flag = fcntl(0, F_GETFL);
-	//flag |= O_NONBLOCK;
-	//fcntl(0, F_SETFL, flag);
-
 	initscr();
 	crmode();
 	noecho();
