@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <curses.h>
 #include <string.h>
@@ -13,7 +14,7 @@ void save_score(int score);
 void open_file();
 void gameover(int score){
 	int c;
-
+	sleep(1);
 	clear();
 	
 	save_score(score);

@@ -18,7 +18,7 @@ void startWin(){
 	move(16,COLS/2-40);
 	addstr("####### ######   #####  #######    #     #  #####  #     # #     # ####### #     # ");
 	move(20,COLS/2-30);
-	addstr("			,////,");
+	addstr("     		      ,////,");
 	move(21, COLS/2-30);
 	addstr("                        /// 6|");
         move(22, COLS/2-30);
