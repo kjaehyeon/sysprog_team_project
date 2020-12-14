@@ -15,7 +15,6 @@
 
 # 주요 코드개요
 ## startwin.c
-![image](https://user-images.githubusercontent.com/50866506/102115350-cb260500-3e7e-11eb-8c65-c5b06c211b29.png)
 
 ### main 화면을 move() , addstr()을 이용하여 표시합니다.
 

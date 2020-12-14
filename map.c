@@ -8,8 +8,6 @@
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 50
 
-
-
 void update_map();
 void generate_random_map(enum position, int[]);
 void create_left_map(void);
@@ -21,8 +19,6 @@ int bottom_map[SCREEN_WIDTH]={0,};
 int top_map[SCREEN_WIDTH] = {0,};
 int left_map[SCREEN_HEIGHT] = {0,}; 
 int right_map[SCREEN_HEIGHT] = {0,};
-
-
 
 void generate_random_map(enum position pos, int map[]){
 	// 1 : monster 2: tree 3: hurdle
